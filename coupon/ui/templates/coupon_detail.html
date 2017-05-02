@@ -1,0 +1,14 @@
+{% extends "layout/html5.html" %}
+{% block body %}
+  <div class="container">
+    <img src="/img/{{ img_url }}" class="img-responsive">
+    <br>
+    <form method="post">
+      <div class="form-group">
+        <input type="tel" name="tel" class="form-control" placeholder="手机号码">
+      </div>
+      <button type="submit" class="btn btn-primary" style="width: 100%;">领取</button>
+    </form>
+  </div>
+
+{% endblock %}

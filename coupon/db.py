@@ -23,11 +23,10 @@ class Connection(object):
                                                                         options.options.db_pass,
                                                                         options.options.db_host,
                                                                         options.options.db_port,
-                                                                        options.options.db_name),
-                                   strategy=ASYNCIO_STRATEGY)
-            cls._instance = asyncio.get_event_loop().run_until_complete(engine.connect())
+                                                                        options.options.db_name))
+            cls._instance = engine.connect()
         return cls._instance
 
 
-async def execute(*args, **kwargs):
-    return await Connection().execute(*args, **kwargs)
+def execute(*args, **kwargs):
+    return Connection().execute(*args, **kwargs)

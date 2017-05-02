@@ -14,11 +14,11 @@ Telephone = Table('telephone', db.MetaData,
                   Column('tel', String(255), nullable=False, index=True))
 
 
-async def add(cid: int, tel: str):
-    coupon_res = await coupon.get_by_id(cid)
+def add(cid: int, tel: str):
+    coupon_res = coupon.get_by_id(cid)
     if not coupon_res:
         raise error.CouponNotFoundError(cid)
     telephone = {'tel': tel,
                  'coupon_id': cid}
-    result = await db.execute(Telephone.insert().values(**telephone))
+    result = db.execute(Telephone.insert().values(**telephone))
     return result.inserted_primary_key

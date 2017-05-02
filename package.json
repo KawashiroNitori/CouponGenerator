@@ -3,6 +3,63 @@
   "version": "0.0.1",
   "author": "Nitori",
   "private": true,
-
-  
+  "devDependencies": {
+    "autoprefixer": "^6.7.7",
+    "babel": "^6.23.0",
+    "babel-core": "^6.24.1",
+    "babel-eslint": "^7.2.3",
+    "babel-loader": "^7.0.0",
+    "babel-preset-latest": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "bootstrap": "^4.0.0-alpha.6",
+    "bootstrap-loader": "^2.0.0",
+    "bootstrap-sass": "^3.3.7",
+    "css-loader": "^0.28.0",
+    "eslint": "^3.19.0",
+    "eslint-plugin-babel": "^4.1.1",
+    "exports-loader": "^0.6.4",
+    "extract-text-webpack-plugin": "^2.1.0",
+    "file-loader": "^0.11.1",
+    "friendly-errors-webpack-plugin": "^1.6.1",
+    "imports-loader": "^0.7.1",
+    "node-sass": "https://registry.npmjs.org/node-sass/-/node-sass-4.5.2.tgz",
+    "postcss-loader": "^1.3.3",
+    "resolve-url-loader": "^2.0.2",
+    "sass-loader": "^6.0.3",
+    "style-loader": "^0.16.1",
+    "uglifyjs-webpack-plugin": "^0.4.3",
+    "url-loader": "^0.5.8",
+    "webpack": "^2.4.1"
+  },
+  "dependencies": {
+    "jquery": "^3.2.1"
+  },
+  "scripts": {
+    "build": "webpack --progress --color --display-error-details"
+  },
+  "babel": {
+    "plugins": [],
+    "presets": [
+      [
+        "latest",
+        {
+          "loose": true
+        }
+      ],
+      "stage-2"
+    ]
+  },
+  "babelForProject": {
+    "plugins": [],
+    "presets": [
+      [
+        "latest",
+        {
+          "loose": true,
+          "modules": false
+        }
+      ],
+      "stage-2"
+    ]
+  }
 }

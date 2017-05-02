@@ -1,0 +1,8 @@
+{% extends "layout/html5.html" %}
+{% block body %}
+<form method="post" enctype="multipart/form-data">
+  <input type="text" name="name" placeholder="名称">
+  <input type="file" name="img">
+  <input type="submit" value="创建" class="btn btn-primary">
+</form>
+{% endblock %}

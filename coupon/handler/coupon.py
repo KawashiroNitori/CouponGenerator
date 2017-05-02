@@ -6,6 +6,7 @@ from os import rename
 
 from coupon import app
 from coupon import error
+from coupon.util import validator
 from coupon.util import options
 from coupon.model import coupon
 from coupon.model import telephone
@@ -57,6 +58,27 @@ class CouponCreateHandler(base.Handler):
 
         name = data['name']
         img_filename = data['img']
-        cid = await coupon.add(name, img_filename)
+        cid = coupon.add(name, img_filename)
         self.redirect(self.reverse_url('coupon_detail', cid=cid))
 
+
+@app.route('/coupon/{cid:\w{22}}', 'coupon_detail')
+class CouponDetailHandler(base.Handler):
+
+    @base.route_argument
+    async def get(self, *, cid: str):
+        coupon_row = coupon.get_by_uuid(cid)
+        if not coupon_row:
+            raise error.CouponNotFoundError(cid)
+        img_url = coupon_row['img']
+        self.render('coupon_detail.html', cid=cid, img_url=img_url)
+
+    @base.route_argument
+    @base.post_argument
+    async def post(self, *, cid: str, tel: str):
+        validator.check_tel(tel)
+        coupon_row = coupon.get_by_uuid(cid)
+        if not coupon_row:
+            raise error.CouponNotFoundError(cid)
+        tel_id = telephone.add(coupon_row['id'], tel)
+        self.render('coupon_success.html')

@@ -275,3 +275,6 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.gitignore.io/api/osx,git,node,python,windows,pycharm
+
+# Static path
+.static/

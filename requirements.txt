@@ -1,7 +1,9 @@
 aiohttp
+mysqlclient
 sqlalchemy
 sqlalchemy-aio
 jinja2
 shortuuid
 pytz
 accept
+colorlog

@@ -13,25 +13,25 @@ Coupon = Table('coupon', db.MetaData,
                Column('img', String(255), nullable=False))
 
 
-async def add(name: str, img: str):
+def add(name: str, img: str):
     uuid = shortuuid.uuid()
     coupon = {'uuid': uuid,
               'name': name,
               'img': img}
-    await db.execute(Coupon.insert().values(**coupon))
+    db.execute(Coupon.insert().values(**coupon))
     return uuid
 
 
-async def get_by_id(cid: int):
-    exp = select(Coupon).where(Coupon.c.id == cid)
-    result = await db.execute(exp)
-    coupon = await result.fetchone()
+def get_by_id(cid: int):
+    exp = select([Coupon]).where(Coupon.c.id == cid)
+    result = db.execute(exp)
+    coupon = result.fetchone()
     return coupon
 
 
-async def get_by_uuid(uuid: str):
-    exp = select(Coupon).where(Coupon.c.uuid == uuid)
-    result = await db.execute(exp)
-    coupon = await result.fetchone()
+def get_by_uuid(uuid: str):
+    exp = select([Coupon]).where(Coupon.c.uuid == uuid)
+    result = db.execute(exp)
+    coupon = result.fetchone()
     return coupon
 

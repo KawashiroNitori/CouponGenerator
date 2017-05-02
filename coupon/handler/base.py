@@ -67,7 +67,7 @@ class Handler(web.View, HandlerBase):
                             page_name='error', page_title='Error')
                 _logger.warning('User facing error by %s %s: %s', self.url, self.remote_ip, repr(e))
         except:
-            _logger.error('System error by %s %s', self.url, self.remote_ip, uid)
+            _logger.error('System error by %s %s', self.url, self.remote_ip)
             raise
         return self.response
 

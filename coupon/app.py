@@ -1,4 +1,5 @@
 import logging
+import os
 from os import path
 
 from aiohttp import web
@@ -19,8 +20,12 @@ class Application(web.Application):
         super(Application, self).__init__(debug=options.options.debug)
         globals()[self.__class__.__name__] = lambda: self  # singleton
 
+        from coupon.handler import coupon
         self.router.add_static('/', STATIC_PATH, name='static')
-        self.router.add_static('/img/', options.options.img_static_path, name='static_img')
+        try:
+            os.mkdir(path.join(STATIC_PATH, 'img'))
+        except FileExistsError:
+            pass
 
 
 def route(url, name):

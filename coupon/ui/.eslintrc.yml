@@ -1,0 +1,20 @@
+parser: babel-eslint
+plugins:
+  - babel
+env:
+  browser: true
+  es6: true
+  jquery: true
+  commonjs: true
+parserOptions:
+  sourceType: module
+  ecmaVersion: 6
+  ecmaFeatures:
+    - impliedStrict
+globals:
+  __webpack_public_path__: true
+  __webpack_require__: true
+rules:
+  indent:
+    - error
+    - 4
