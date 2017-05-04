@@ -2,7 +2,6 @@ import shortuuid
 from sqlalchemy.schema import Table, Column
 from sqlalchemy.sql import func, select
 from sqlalchemy import Integer, String, DateTime
-from sqlalchemy_utc import UtcDateTime
 
 from coupon import db
 
