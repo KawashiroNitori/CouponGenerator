@@ -2,6 +2,7 @@ aiohttp
 mysqlclient
 sqlalchemy
 sqlalchemy-aio
+sqlalchemy-utc
 jinja2
 shortuuid
 pytz

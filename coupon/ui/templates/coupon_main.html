@@ -1,0 +1,34 @@
+{% extends 'layout/html5.html' %}
+{% block body %}
+<div class="container">
+  <h1>礼券列表</h1>
+  <a href="{{ reverse_url('coupon_create') }}" class="btn btn-primary" target="_blank">
+    <span class="glyphicon glyphicon-plus"></span>
+    添加
+  </a>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>标题</th>
+        <th>创建时间</th>
+        <th>查看次数</th>
+        <th>领取次数</th>
+        <th>备注</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for coupon in coupons %}
+      <tr>
+        <th scope="row">{{ loop.index }}</th>
+        <td><a href="{{ reverse_url('coupon_detail', cid=coupon['uuid']) }}" target="_blank">{{ coupon['title'] }}</a></td>
+        <td>{{ datetime_span(coupon['time']) }}</td>
+        <td>{{ coupon['view_count'] }}</td>
+        <td>{{ coupon['submit_count'] }}</td>
+        <td>{{ coupon['name'] }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

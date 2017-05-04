@@ -1,8 +1,32 @@
 {% extends "layout/html5.html" %}
 {% block body %}
-<form method="post" enctype="multipart/form-data">
-  <input type="text" name="name" placeholder="名称">
-  <input type="file" name="img">
-  <input type="submit" value="创建" class="btn btn-primary">
-</form>
+  <div class="container">
+    <h1>{% if edit %}编辑{% else %}创建{% endif %}礼券</h1>
+    <form method="post" enctype="multipart/form-data">
+      <div class="form-group">
+        <label for="title">标题</label>
+        <input class="form-control" id="title" type="text" name="title" placeholder="显示为页面的标题" value="{{ title|default('', True) }}" required>
+      </div>
+      <div class="form-group">
+        <label for="name">备注</label>
+        <input class="form-control" id="name" type="text" name="name" placeholder="默认为空" value="{{ name|default('', True) }}">
+      </div>
+      <div class="form-group">
+        <label for="receive_text">领取字样</label>
+        <input class="form-control" id="receive_text" type="text" name="receive_text" placeholder="立即领取" value="{{ receive_text|default('', True) }}">
+      </div>
+      <div class="form-group">
+        <label for="custom_style">自定义样式</label>
+        <textarea class="form-control" id="custom_style" name="custom_style" rows="5">{{ custom_style|default('', True) }}</textarea>
+      </div>
+      <div class="form-group">
+        <label for="img">图片</label>
+        <input class="form-control-file" id="img" type="file" name="img" {% if not edit %}required{% endif %}>
+        {% if img %}
+        <img class="img-responsive" src="/img/{{ img }}">
+        {% endif %}
+      </div>
+      <button type="submit" class="btn btn-primary">提交</button>
+    </form>
+  </div>
 {% endblock %}

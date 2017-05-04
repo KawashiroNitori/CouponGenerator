@@ -1,0 +1,9 @@
+{% extends 'layout/html5.html' %}
+{% block body %}
+<div class="container">
+  <h1>创建成功。</h1>
+  <p>
+    <a href="{{ reverse_url('coupon_detail', cid=cid) }}">{{ reverse_url('coupon_detail', cid=cid) }}</a>
+  </p>
+</div>
+{% endblock %}

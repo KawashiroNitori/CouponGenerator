@@ -9,7 +9,7 @@ from aiohttp import web
 from coupon.util import options
 from coupon import app
 
-options.define('listen', default='http://127.0.0.1:8888', help='Server listening address.')
+options.define('listen', default='http://0.0.0.0:8888', help='Server listening address.')
 options.define('log_format',
                default=('%(log_color)s[%(levelname).1s '
                         '%(asctime)s %(module)s:%(lineno)d]%(reset)s %(message)s'), help='Log format.')

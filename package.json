@@ -9,6 +9,8 @@
     "babel-core": "^6.24.1",
     "babel-eslint": "^7.2.3",
     "babel-loader": "^7.0.0",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-latest": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
     "bootstrap": "^4.0.0-alpha.6",
@@ -23,22 +25,32 @@
     "friendly-errors-webpack-plugin": "^1.6.1",
     "imports-loader": "^0.7.1",
     "node-sass": "https://registry.npmjs.org/node-sass/-/node-sass-4.5.2.tgz",
+    "normalize.css": "^5.0.0",
     "postcss-loader": "^1.3.3",
     "resolve-url-loader": "^2.0.2",
     "sass-loader": "^6.0.3",
     "style-loader": "^0.16.1",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.1",
     "uglifyjs-webpack-plugin": "^0.4.3",
     "url-loader": "^0.5.8",
     "webpack": "^2.4.1"
   },
   "dependencies": {
-    "jquery": "^3.2.1"
+    "babel-runtime": "https://registry.npm.taobao.org/babel-runtime/download/babel-runtime-6.23.0.tgz",
+    "jquery": "^3.2.1",
+    "tether": "https://registry.npm.taobao.org/tether/download/tether-1.4.0.tgz",
+    "timeago.js": "^3.0.1"
   },
   "scripts": {
-    "build": "webpack --progress --color --display-error-details"
+    "build": "webpack --progress --color --display-error-details",
+    "build:production": "npm run build -- --env.production",
+    "watch": "npm run build -- --env.watch -d --watch"
   },
   "babel": {
-    "plugins": [],
+    "plugins": [
+      "transform-runtime"
+    ],
     "presets": [
       [
         "latest",
@@ -50,7 +62,10 @@
     ]
   },
   "babelForProject": {
-    "plugins": [],
+    "plugins": [
+      "transform-decorators-legacy",
+      "transform-runtime"
+    ],
     "presets": [
       [
         "latest",

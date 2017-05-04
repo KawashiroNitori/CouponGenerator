@@ -7,6 +7,11 @@ CREATE TABLE IF NOT EXISTS `coupon` (
   `uuid` VARCHAR(255) NOT NULL,
   `name` VARCHAR(255) NOT NULL DEFAULT '',
   `img` VARCHAR(255) NOT NULL,
+  `title` VARCHAR(255) NOT NULL DEFAULT '',
+  `receive_text` VARCHAR(255) DEFAULT NULL,
+  `custom_style` TEXT DEFAULT NULL,
+  `view_count` INT(20) NOT NULL DEFAULT 0,
+  `submit_count` INT(10) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   INDEX (`time`),
   UNIQUE KEY (`uuid`)

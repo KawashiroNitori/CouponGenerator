@@ -23,7 +23,8 @@ class Connection(object):
                                                                         options.options.db_pass,
                                                                         options.options.db_host,
                                                                         options.options.db_port,
-                                                                        options.options.db_name), encoding='utf-8')
+                                                                        options.options.db_name),
+                                   encoding='utf-8')
             cls._instance = engine.connect()
         return cls._instance
 

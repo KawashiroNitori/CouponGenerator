@@ -10,3 +10,13 @@ def is_tel(s):
 def check_tel(s):
     if not is_tel(s):
         raise error.ValidationError('tel')
+
+
+def is_title(s):
+    return bool(re.fullmatch(r'.+', s))
+
+
+def check_title(s):
+    if not is_title(s):
+        raise error.ValidationError('title')
+

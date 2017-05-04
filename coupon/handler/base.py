@@ -3,6 +3,7 @@ import asyncio
 import logging
 import accept
 import calendar
+import markupsafe
 import functools
 from aiohttp import web
 
@@ -21,6 +22,7 @@ class HandlerBase(object):
     TITLE = None
 
     async def prepare(self):
+        self.datetime_span = functools.partial(_datetime_span, timezone=pytz.timezone('Asia/Shanghai'))
         self.datetime_stamp = _datetime_stamp
         self.reverse_url = _reverse_url
 
@@ -38,12 +40,12 @@ class HandlerBase(object):
         if 'page_title' not in kwargs:
             kwargs['page_title'] = self.TITLE
         kwargs['reverse_url'] = self.reverse_url
+        kwargs['datetime_span'] = self.datetime_span
         return template.Environment().get_template(template_name).render(kwargs)
 
     def render_title(self, page_title=None):
         if not page_title:
             page_title = self.TITLE
-        page_title += ' - Coupon'
         return page_title
 
 
@@ -118,6 +120,19 @@ class Handler(web.View, HandlerBase):
             self.json(kwargs)
         else:
             self.render(template_name, **kwargs)
+
+
+# @functools.lru_cache()
+def _datetime_span(dt, relative=True, format='%Y-%m-%d %H:%M:%S', timezone=pytz.utc):
+    if not dt.tzinfo:
+        dt = dt.replace(tzinfo=timezone)
+    return markupsafe.Markup(
+        '<span class="time{0}" data-timestamp="{1}">{2}</span>'.format(
+            ' relative' if relative else '',
+            calendar.timegm(dt.utctimetuple()),
+            dt.astimezone(timezone).strftime(format)
+        )
+    )
 
 
 @functools.lru_cache()

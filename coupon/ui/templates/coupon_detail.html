@@ -1,14 +1,23 @@
 {% extends "layout/html5.html" %}
 {% block body %}
+  {% if custom_style %}
+  <style>{{ custom_style }}</style>
+  {% endif %}
   <div class="container">
-    <img src="/img/{{ img_url }}" class="img-responsive">
+    <img src="/img/{{ img_url }}" class="img-responsive" id="coupon-img">
     <br>
     <form method="post">
       <div class="form-group">
-        <input type="tel" name="tel" class="form-control" placeholder="手机号码">
+        <input type="tel" name="tel" class="form-control" placeholder="手机号码" id="tel-input" required>
       </div>
-      <button type="submit" class="btn btn-primary" style="width: 100%;">领取</button>
+      <button type="submit" class="btn btn-primary" style="width: 100%;" id="submit-btn">
+        {{ receive_text|default('立即领取', True) }}
+      </button>
+
     </form>
+    <div class="alert alert-danger illegal-tel-alert" style="display: none;">
+          手机号码非法。
+    </div>
   </div>
 
 {% endblock %}

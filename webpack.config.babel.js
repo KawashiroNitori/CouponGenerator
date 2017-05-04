@@ -25,7 +25,7 @@ export default function (env = {}) {
         devtool: env.production ? 'source-map' : false,
         entry: {
             bootstrap: 'bootstrap-loader',
-            //  coupon: path.resolve(__dirname, 'ui', 'Entry.js'),
+            coupon: path.resolve(__dirname, 'coupon', 'ui', 'Entry.js'),
         },
         output: {
             path: path.resolve(__dirname, 'coupon', '.static'),
@@ -49,14 +49,18 @@ export default function (env = {}) {
                     use: [babelLoader()],
                 },
                 {
-                    test: /\.css$/, use: extractCSS.extract({
-                        fallback: 'style-loader', use: 'css-loader!postcss-loader',
-                    })
+                    test: /\.css$/,
+                    include: /node_modules[\/\\]/,
+                    use: extractCSS.extract(
+                        ['css-loader?importLoaders=1', 'postcss-loader'],
+                    )
                 },
                 {
-                    test: /\.scss$/, use: extractCSS.extract({
-                        fallback: 'style-loader', use: 'css-loader!postcss-loader!sass-loader',
-                    })
+                    test: /\.scss$/,
+                    include: /node_modules[\/\\]/,
+                    use: extractCSS.extract(
+                        ['css-loader?importLoaders=1', 'postcss-loader', 'sass-loader'],
+                    )
                 },
 
                 {
@@ -77,10 +81,24 @@ export default function (env = {}) {
             ],
         },
         plugins: [
+            new webpack.ProvidePlugin({
+                $: 'jquery',
+                jQuery: 'jquery',
+                'window.jQuery': 'jquery',
+                tether: 'tether',
+                Tether: 'tether',
+                'window.Tether': 'tether',
+            }),
             extractCSS,
             env.production
                 ? new webpack.optimize.UglifyJsPlugin({ sourceMap: false })
                 : function () {},
+            new webpack.LoaderOptionsPlugin({
+                options: {
+                    context: __dirname,
+                    postcss: [require('autoprefixer')],
+                },
+            }),
         ],
     };
     return config;
